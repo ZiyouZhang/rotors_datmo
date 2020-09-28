@@ -1,6 +1,6 @@
-[![MIT License][license-shield]][license-url]
+<!-- [![MIT License][license-shield]][license-url]
 [![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
+[![LinkedIn][linkedin-shield]][linkedin-url] -->
 
 
 <br />
@@ -64,6 +64,7 @@ Follow the [instructions](https://github.com/ethz-asl/rotors_simulator) to insta
 ## Dependencies
 
 - [Robot Operating System (ROS)] (middleware for robotics)
+- [RotorS] (simulation package)
 - [AprilTag] (middleware for robotics)
 - [Eigen] (linear algebra library)
 
@@ -167,5 +168,6 @@ Ziyou Zhang - ziyou.zhang@outlook.com
 [sensor_msgs/Image]: http://docs.ros.org/melodic/api/sensor_msgs/html/msg/Image.html
 [nav_msgs/Odometry]: http://docs.ros.org/melodic/api/nav_msgs/html/msg/Odometry.html
 [Robot Operating System (ROS)]: http://wiki.ros.org
+[RotorS]: https://github.com/ethz-asl/rotors_simulator
 [AprilTag]: https://github.com/AprilRobotics/apriltag
 [Eigen]:http://eigen.tuxfamily.org/
