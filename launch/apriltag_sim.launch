@@ -1,0 +1,61 @@
+<launch>
+
+  <arg name="mav_name" default="firefly"/>
+  <arg name="world_name" default="apriltag_sim"/>
+  <arg name="enable_logging" default="false" />
+  <arg name="enable_ground_truth" default="true" />
+  <arg name="log_file" default="$(arg mav_name)" />
+
+  <!-- Settings -->
+  <!-- <env name="GAZEBO_MODEL_PATH" value="$(find rotors_datmo)/models:$(optenv GAZEBO_MODEL_PATH)" />
+  <env name="GAZEBO_RESOURCE_PATH" value="$(find rotors_datmo)/worlds:$(optenv GAZEBO_RESOURCE_PATH)" /> -->
+  <env name="GAZEBO_MODEL_PATH" value="${GAZEBO_MODEL_PATH}:$(find rotors_gazebo)/models"/>
+  <env name="GAZEBO_RESOURCE_PATH" value="${GAZEBO_RESOURCE_PATH}:$(find rotors_gazebo)/models"/>
+
+  <group ns="$(arg mav_name)">
+    <include file="$(find rotors_gazebo)/launch/spawn_mav.launch">
+      <arg name="mav_name" value="$(arg mav_name)" />
+      <arg name="model" value="$(find rotors_description)/urdf/mav_with_camera.gazebo" />
+      <arg name="enable_logging" value="$(arg enable_logging)" />
+      <arg name="enable_ground_truth" value="$(arg enable_ground_truth)" />
+      <arg name="log_file" value="$(arg log_file)"/>
+      <!-- <arg name="x" value="0.0"/>
+      <arg name="y" value="-0.5"/>
+      <arg name="z" value="0.5"/> -->
+    </include>
+    <node name="lee_position_controller_node" pkg="rotors_control" type="lee_position_controller_node" output="screen">
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/lee_controller_$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
+      <remap from="odometry" to="odometry_sensor1/odometry" />
+    </node>
+
+    <node name="moving_mav" pkg="rotors_datmo" type="moving_mav" output="screen"/>
+
+    <!-- <node name="hovering_example" pkg="rotors_gazebo" type="hovering_example" output="screen"/> -->
+
+    <!-- <node name="key_joystick" pkg="rotors_joy_interface" type="key_joystick.py" />
+    <node name="joy_node" pkg="joy" type="joy_node" />
+    <node name="rotors_joy_interface" pkg="rotors_joy_interface" type="rotors_joy_interface" />
+    <node name="roll_pitch_yawrate_thrust_controller_node" pkg="rotors_control" type="roll_pitch_yawrate_thrust_controller_node" output="screen">
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/roll_pitch_yawrate_thrust_controller_$(arg mav_name).yaml" />
+      <rosparam command="load" file="$(find rotors_gazebo)/resource/$(arg mav_name).yaml" />
+      <remap from="odometry" to="odometry_sensor1/odometry" />
+    </node> -->
+
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  </group>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find rotors_gazebo)/worlds/$(arg world_name).world" />
+    <arg name="use_sim_time" value="true" />
+    <arg name="debug" value="true"/>
+    <arg name="verbose" value="true"/>
+    <arg name="paused" value="false"/>
+    <arg name="gui" value="true"/>
+  </include>
+
+  <!-- <node name="rviz" pkg="rviz" type="rviz" args="-d $(find rotors_datmo)/rviz/apriltag_sim.rviz" /> -->
+  <node name="apriltag_detection" pkg="rotors_datmo" type="apriltag_detection_node" output="screen" required="false"/>
+  <!-- <node name="rosbag_record_data" pkg="rosbag" type="record" args="-o /home/ziyou/catkin_ws/src/rotors_simulator/rotors_datmo/bag/data.bag /detected_object_state /updated_object_state /predicted_object_state /tag_box_pose_ground_truth" output="screen"/> -->
+</launch>

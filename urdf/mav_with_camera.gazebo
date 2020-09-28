@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!--
+  Copyright 2015 Fadri Furrer, ASL, ETH Zurich, Switzerland
+  Copyright 2015 Michael Burri, ASL, ETH Zurich, Switzerland
+  Copyright 2015 Mina Kamel, ASL, ETH Zurich, Switzerland
+  Copyright 2015 Janosch Nikolic, ASL, ETH Zurich, Switzerland
+  Copyright 2015 Markus Achtelik, ASL, ETH Zurich, Switzerland
+  Copyright 2020 Ziyou Zhang, Imperial College London, United Kingdom
+-->
+
+<robot name="$(arg mav_name)" xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:include filename="$(find rotors_description)/urdf/mav_generic_odometry_sensor.gazebo" />
+
+  <xacro:camera_macro
+    namespace="${namespace}"
+    parent_link="${namespace}/base_link"
+    camera_suffix="nadir"
+    frame_rate="30.0"
+    horizontal_fov="1.047"
+    image_width="640"
+    image_height="480"
+    image_format="R8G8B8"
+    min_distance="0.02"
+    max_distance="100"
+    noise_mean="0.0"
+    noise_stddev="0.007"
+    enable_visual="true">
+
+    <box size="0.05 0.05 0.02" />
+    <origin xyz="0 0 ${-arm_length/4}" rpy="0 0 0" />
+  </xacro:camera_macro>
+</robot>
