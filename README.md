@@ -93,7 +93,7 @@ Create symblic link of the urdf files in the rotors_description/urdf folder. For
 ln -s <path to rotors_simulation>/rotors_datmo/urdf/mav_with_camera.gazebo <path to rotors_simulation>/rotors_description/urdf/
 ```
 
-Create symblic link of the world files in the rotors_gazebo/model folder. For example:
+Create symblic link of the world files in the rotors_gazebo/worlds folder. For example:
 
 ```
 ln -s <path to rotors_simulation>/rotors_datmo/worlds/apriltag_sim.world <path to rotors_simulation>/rotors_gazebo/worlds/
