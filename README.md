@@ -17,7 +17,7 @@
     <br />
     <a href="https://github.com/ZiyouZhang/rotors_datmo"><strong>Explore the docs »</strong></a>
     <br />
-    <a href="https://github.com/ZiyouZhang/rotors_datmo/blob/misc/demo.mp4">View Demo</a>
+    <a href="https://youtu.be/8GKEukIKH2A">View Demo</a>
     ·
     <a href="https://github.com/ZiyouZhang/rotors_datmo/issues">Report Bug</a>
     ·
