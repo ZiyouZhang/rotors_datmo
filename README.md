@@ -1,7 +1,6 @@
-<!-- [![MIT License][license-shield]][license-url]
+[![MIT License][license-shield]][license-url]
 [![Issues][issues-shield]][issues-url]
-[![LinkedIn][linkedin-shield]][linkedin-url] -->
-
+[![LinkedIn][linkedin-shield]][linkedin-url]
 
 <br />
 <p align="center">
